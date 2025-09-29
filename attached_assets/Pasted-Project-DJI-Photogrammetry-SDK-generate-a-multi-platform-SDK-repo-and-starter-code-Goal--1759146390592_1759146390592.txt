@@ -1,0 +1,27 @@
+Project: "DJI Photogrammetry SDK" — generate a multi-platform SDK repo and starter code.
+
+Goal:
+- Provide a downloadable SDK for DJI drone photogrammetry that includes:
+  1. Mobile wrappers for DJI Mobile SDK (Android AAR + iOS framework) exposing mission planner APIs, camera trigger helpers, and metadata logging.
+  2. A Python processing package `dji_photogrammetry` that wraps OpenDroneMap/OpenSfM CLI to produce orthomosaic, pointcloud, DEM and textured meshes from an images + metadata folder.
+  3. A CLI to create flight missions, ingest images & metadata, and upload to a processing server.
+  4. GitHub Actions workflows that build Android AAR, build Python wheel, and publish artifacts to a GitHub Release on tag.
+
+Requirements / constraints:
+- Do NOT embed any DJI API keys. Provide instructions to the integrator to insert their own DJI AppKey in runtime/config.
+- Keep the mobile wrappers minimal: mission planning (grid/double-grid/oblique), camera trigger (time/distance), and export of metadata JSON/CSV with EXIF and drone telemetry.
+- Processing module should call the ODM/OpenSfM CLI if present; include a fallback path that instructs the user how to install ODM. Provide a simple docker-compose service file to run ODM in Docker.
+- Include a small sample dataset (6 images) and a demo notebook showing how to run `dji_photogrammetry.process_dataset("examples/sample_dataset", output="out/")`.
+- Add docs/README with setup steps, licensing notes (AGPL for ODM), and DJI developer registration links.
+
+Deliverables (create files and a top-level repo layout):
+- `mobile/android-sdk-wrapper/` with Gradle library and README showing how to build AAR.
+- `processing/` with Python package `dji_photogrammetry` (pyproject.toml, README, example usage).
+- `cli/` with a simple `create-mission` and `ingest` commands.
+- `.github/workflows/build-and-release.yml` (build AAR & wheel, attach artifacts to release).
+- `examples/sample_dataset/` with small images and `images.csv`.
+- `README.md` with short tutorial and references (DJI developer, ODM docs).
+
+Code style: production-grade skeleton (clear functions, docstrings, typed Python, Gradle config for AAR). Include basic unit tests for metadata writer.
+
+Start by scaffolding repo files and then populate core files (Android wrapper placeholder, Python wrapper that calls `odm_orthophoto`, a CLI `ingest` that turns image EXIF into `images.csv`).
