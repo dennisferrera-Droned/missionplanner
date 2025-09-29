@@ -1,0 +1,7 @@
+filename,filepath,latitude,longitude,altitude_m,yaw_deg,pitch_deg,roll_deg,heading_deg,focal_length_mm,sensor_width_mm,sensor_height_mm,image_width_px,image_height_px,iso,aperture,shutter_speed,white_balance,capture_time,gps_time,camera_model,lens_model,ground_speed_ms
+DJI_001.jpg,./DJI_001.jpg,,,,,,,,24.0,13.2,8.8,4000,3000,,,,,,,,,
+DJI_002.jpg,./DJI_002.jpg,,,,,,,,24.0,13.2,8.8,4000,3000,,,,,,,,,
+DJI_003.jpg,./DJI_003.jpg,,,,,,,,24.0,13.2,8.8,4000,3000,,,,,,,,,
+DJI_004.jpg,./DJI_004.jpg,,,,,,,,24.0,13.2,8.8,4000,3000,,,,,,,,,
+DJI_005.jpg,./DJI_005.jpg,,,,,,,,24.0,13.2,8.8,4000,3000,,,,,,,,,
+DJI_006.jpg,./DJI_006.jpg,,,,,,,,24.0,13.2,8.8,4000,3000,,,,,,,,,

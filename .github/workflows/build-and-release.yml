@@ -1,0 +1,158 @@
+name: Build and Release DJI Photogrammetry SDK
+
+on:
+  push:
+    tags:
+      - 'v*'
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Grant execute permission for gradlew
+      run: chmod +x mobile/android-sdk-wrapper/gradlew
+      
+    - name: Build Android AAR
+      run: |
+        cd mobile/android-sdk-wrapper
+        ./gradlew assembleRelease
+        
+    - name: Upload Android AAR
+      uses: actions/upload-artifact@v3
+      with:
+        name: android-aar
+        path: mobile/android-sdk-wrapper/build/outputs/aar/*.aar
+
+  build-python:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build wheel twine
+        
+    - name: Build Python wheel
+      run: |
+        cd processing
+        python -m build
+        
+    - name: Upload Python wheel
+      uses: actions/upload-artifact@v3
+      with:
+        name: python-wheel
+        path: processing/dist/*.whl
+
+  test-python:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        cd processing
+        pip install -e .[dev]
+        
+    - name: Run tests
+      run: |
+        cd processing
+        python -m pytest tests/ -v
+
+  release:
+    needs: [build-android, build-python]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download Android AAR
+      uses: actions/download-artifact@v3
+      with:
+        name: android-aar
+        path: artifacts/
+        
+    - name: Download Python wheel
+      uses: actions/download-artifact@v3
+      with:
+        name: python-wheel
+        path: artifacts/
+        
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: DJI Photogrammetry SDK ${{ github.ref_name }}
+        body: |
+          ## DJI Photogrammetry SDK ${{ github.ref_name }}
+          
+          ### Features
+          - Mobile SDK wrapper for Android (AAR)
+          - Python processing package with OpenDroneMap integration
+          - CLI tools for mission planning and image processing
+          - Sample dataset and documentation
+          
+          ### Downloads
+          - `dji-photogrammetry-android-${{ github.ref_name }}.aar` - Android library
+          - `dji_photogrammetry-*-py3-none-any.whl` - Python package
+          
+          ### Installation
+          ```bash
+          # Python package
+          pip install dji_photogrammetry-*.whl
+          
+          # Android AAR - add to your project dependencies
+          ```
+          
+          See README.md for complete setup and usage instructions.
+        draft: false
+        prerelease: false
+        
+    - name: Upload Release Assets
+      run: |
+        for file in artifacts/*; do
+          if [ -f "$file" ]; then
+            gh release upload ${{ github.ref_name }} "$file"
+          fi
+        done
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,259 @@
+{
+  "mission_info": {
+    "created": "2025-09-29T12:01:50.471269",
+    "pattern": "grid",
+    "roi_file": "roi.json",
+    "total_waypoints": 28
+  },
+  "mission_data": {
+    "pattern": "grid",
+    "waypoints": [
+      {
+        "latitude": 37.7744,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.7744,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77454822134387,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77454822134387,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77469644268774,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77469644268774,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77484466403161,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77484466403161,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77499288537548,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77499288537548,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77514110671935,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77514110671935,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775289328063224,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775289328063224,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775437549407094,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775437549407094,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775585770750965,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775585770750965,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775733992094835,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775733992094835,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775882213438706,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.775882213438706,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77603043478258,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77603043478258,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77617865612645,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77617865612645,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 90.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77632687747032,
+        "longitude": -122.4169,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      },
+      {
+        "latitude": 37.77632687747032,
+        "longitude": -122.4199,
+        "altitude_m": 100.0,
+        "heading_deg": 270.0,
+        "gimbal_pitch_deg": -90.0,
+        "trigger_camera": true
+      }
+    ],
+    "settings": {
+      "altitude_m": 100.0,
+      "front_overlap_pct": 80.0,
+      "side_overlap_pct": 70.0,
+      "flight_speed_ms": 15.0
+    },
+    "camera_settings": {
+      "focal_length_mm": 24.0,
+      "sensor_width_mm": 13.2,
+      "sensor_height_mm": 8.8,
+      "gimbal_pitch_deg": -90.0
+    },
+    "photo_intervals": {
+      "distance_m": 8.249999999999998,
+      "time_s": 0.5499999999999999
+    },
+    "mission_stats": {
+      "total_waypoints": 28,
+      "gsd_cm_per_pixel": 1.375,
+      "coverage_area_m2": 58769.84129421452,
+      "estimated_photos": 473
+    }
+  }
+}

@@ -1,0 +1,2 @@
+[console_scripts]
+dji-photogrammetry = dji_photogrammetry.cli:main
