@@ -20,6 +20,7 @@ from .image_processor import ImageProcessor
 from .processing_engine import ProcessingEngine
 from .rtk_ppk import RinexParser, GCPManager, PPKProcessor, GroundControlPoint
 from .follow_mode import FollowRoute, FollowModeController, RouteWaypoint, RouteSegment
+from .drone_profiles import DroneProfile, FlightLimits, ValidationResult, get_profile, list_profiles, validate_mission, PROFILES
 
 __all__ = [
     "MissionPlanner",
@@ -37,4 +38,11 @@ __all__ = [
     "FollowModeController",
     "RouteWaypoint",
     "RouteSegment",
+    "DroneProfile",
+    "FlightLimits",
+    "ValidationResult",
+    "get_profile",
+    "list_profiles",
+    "validate_mission",
+    "PROFILES",
 ]

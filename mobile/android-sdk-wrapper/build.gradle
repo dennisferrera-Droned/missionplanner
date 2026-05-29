@@ -9,13 +9,19 @@ android {
     compileSdk 34
 
     defaultConfig {
-        minSdk 21
+        // MSDK v5 requires minimum API 23
+        minSdk 23
         targetSdk 34
-        versionCode 1
-        versionName "0.1.0"
+        versionCode 2
+        versionName "0.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        ndk {
+            // MSDK v5 native libs — include all ABIs the Mini 3 supports
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
     }
 
     buildTypes {
@@ -24,38 +30,78 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-    
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
-    
+
     buildFeatures {
         buildConfig true
+    }
+
+    // MSDK v5 ships large native binaries — raise the APK split threshold
+    packagingOptions {
+        doNotStrip "*/*/libdjivideo.so"
+        doNotStrip "*/*/libDJIFlySafeCore-CSDK.so"
+        doNotStrip "*/*/libdji_innertools.so"
+        doNotStrip "*/*/libdji_infoc.so"
+        doNotStrip "*/*/libdji_logging.so"
+        doNotStrip "*/*/libdji_vision.so"
+        doNotStrip "*/*/libdji_aircraft_vision.so"
+        doNotStrip "*/*/libdji_flightrecord.so"
+        doNotStrip "*/*/libdjiphoto.so"
+        doNotStrip "*/*/libdjisecurity.so"
+        doNotStrip "*/*/libgroundsdk.so"
+        doNotStrip "*/*/libupgrader.so"
+        doNotStrip "*/*/libFRCij.so"
+        excludes += ['META-INF/rxjava.properties']
+    }
+}
+
+// DJI MSDK v5 Maven repository
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://s3.amazonaws.com/repo.commonsware.com' }
+    maven {
+        url 'https://artifacts.djicdn.com/packages/'
     }
 }
 
 dependencies {
-    // DJI Mobile SDK
-    implementation 'com.dji:dji-sdk:4.16.4'
-    provided 'com.dji:dji-sdk-provided:4.16.4'
-    
+    // -----------------------------------------------------------------------
+    // DJI Mobile SDK v5 — required for Mini 3 / Mini 3 Pro / Mini 4 Pro
+    // Mini 3 is NOT supported by MSDK v4.
+    // MSDK v5 uses a split core + UX SDK architecture.
+    // -----------------------------------------------------------------------
+    implementation 'com.dji:dji-sdk-v5-aircraft:5.9.0'
+    // 'compileOnly' replaces the old (broken) 'provided' keyword
+    compileOnly 'com.dji:dji-sdk-v5-aircraft-provided:5.9.0'
+
+    // MSDK v5 network SDK (live streaming / FlightHub)
+    implementation 'com.dji:dji-sdk-v5-networkImp:5.9.0'
+
     // Android Core
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
-    
-    // JSON handling
+
+    // JSON handling (used by mission export)
     implementation 'com.google.code.gson:gson:2.10.1'
-    
+
     // Location services
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.android.gms:play-services-maps:18.2.0'
-    
+
+    // Coroutines (MSDK v5 callbacks are coroutine-friendly)
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+
     // Testing
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -67,7 +113,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.dji'
             artifactId = 'photogrammetry-sdk'
-            version = '0.1.0'
+            version = '0.2.0'
 
             afterEvaluate {
                 from components.release
