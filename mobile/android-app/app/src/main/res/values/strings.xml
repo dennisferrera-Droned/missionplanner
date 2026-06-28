@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DJI Photogrammetry</string>
+    <string name="mission_planner">Mission Planner</string>
+    <string name="route_follow">Route Follow Mode</string>
+    <string name="export_mission">Export Mission</string>
+</resources>

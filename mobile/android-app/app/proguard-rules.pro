@@ -1,0 +1,3 @@
+-keep class com.dji.photogrammetry.app.** { *; }
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
