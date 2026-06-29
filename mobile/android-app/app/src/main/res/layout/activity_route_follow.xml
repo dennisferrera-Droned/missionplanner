@@ -27,7 +27,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Route summary -->
+            <!-- Route waypoints card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,18 +37,21 @@
                 <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="16dp">
+
                     <TextView android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Route Waypoints"
                         android:textStyle="bold" android:textSize="15sp"
                         android:textColor="?attr/colorPrimary"
                         android:layout_marginBottom="8dp"/>
+
                     <TextView android:id="@+id/tvRouteSummary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:layout_marginBottom="8dp"
                         android:text=""/>
+
                     <TextView android:id="@+id/tvWaypoints"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -57,30 +60,47 @@
                         android:lineSpacingMultiplier="1.5"
                         android:layout_marginBottom="12dp"
                         android:text=""/>
+
+                    <!-- Row 1: Add + Clear -->
                     <LinearLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
+
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnAddWaypoint"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginEnd="8dp"
-                            android:text="+ Add"
+                            android:text="+ Add Waypoint"
                             app:cornerRadius="8dp"/>
+
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnClearWaypoints"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Clear"
+                            android:text="Clear All"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             app:cornerRadius="8dp"/>
+
                     </LinearLayout>
+
+                    <!-- Row 2: Import KML / KMZ (full width) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnImportKml"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Import KML / KMZ as Waypoints"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        app:cornerRadius="8dp"
+                        app:icon="@android:drawable/ic_menu_upload"/>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Settings -->
+            <!-- Settings card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,6 +110,7 @@
                 <LinearLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="16dp">
+
                     <TextView android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Settings"
@@ -97,6 +118,7 @@
                         android:textColor="?attr/colorPrimary"
                         android:layout_marginBottom="12dp"/>
 
+                    <!-- Pace Speed -->
                     <LinearLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -117,6 +139,43 @@
                         android:max="14"
                         android:layout_marginBottom="16dp"/>
 
+                    <!-- Drone Altitude -->
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="4dp">
+                        <TextView android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Drone Altitude (AGL)" android:textSize="13sp"/>
+                        <TextView android:id="@+id/tvAltitudeVal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold" android:textSize="13sp"
+                            android:text="30 m"/>
+                    </LinearLayout>
+                    <SeekBar android:id="@+id/seekAltitude"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="58"
+                        android:layout_marginBottom="4dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Applies to new waypoints and KML imports. Use 'Apply to All' to update existing waypoints."
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginBottom="8dp"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnApplyAltitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apply to All Waypoints"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        app:cornerRadius="8dp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Fly Backwards -->
                     <LinearLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -132,6 +191,7 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
+                    <!-- Update Home -->
                     <LinearLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -146,6 +206,7 @@
                             android:layout_height="wrap_content"
                             android:checked="true"/>
                     </LinearLayout>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
