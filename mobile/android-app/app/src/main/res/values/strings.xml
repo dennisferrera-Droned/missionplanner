@@ -4,4 +4,5 @@
     <string name="mission_planner">Mission Planner</string>
     <string name="route_follow">Route Follow Mode</string>
     <string name="export_mission">Export Mission</string>
+    <string name="flight_control">Flight Control</string>
 </resources>

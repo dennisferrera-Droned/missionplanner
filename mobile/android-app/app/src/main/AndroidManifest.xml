@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- ── Standard permissions ─────────────────────────────────────────── -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -9,13 +13,45 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
+    <!-- ── Bluetooth (DJI RC / OcuSync link detection) ──────────────────── -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- ── USB (RC connection via USB-C or Micro-USB) ───────────────────── -->
+    <uses-permission android:name="android.permission.USB_PERMISSION" />
+
+    <!-- ── Vibration (DJI alert feedback) ───────────────────────────────── -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- ── Allow queries to DJI Pilot 2 / DJI Go 5 if installed ─────────── -->
+    <queries>
+        <package android:name="com.dji.industry.pilot" />
+        <package android:name="dji.go.v5" />
+    </queries>
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DJIPhotogrammetry">
+        android:theme="@style/Theme.DJIPhotogrammetry"
+        android:usesCleartextTraffic="true">
+
+        <!--
+            ⚠  DJI APP KEY — obtain yours free at https://developer.dji.com
+               Register your app with package name: com.dji.photogrammetry.app
+               Then replace the value below with your key.
+        -->
+        <meta-data
+            android:name="com.dji.sdk.API_KEY"
+            android:value="YOUR_DJI_APP_KEY" />
+
+        <!-- ── Activities ────────────────────────────────────────────────── -->
 
         <activity
             android:name=".MainActivity"
@@ -44,6 +80,13 @@
             android:exported="false"
             android:label="@string/export_mission"
             android:parentActivityName=".MissionPlannerActivity" />
+
+        <activity
+            android:name=".FlightControlActivity"
+            android:exported="false"
+            android:label="@string/flight_control"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape" />
 
     </application>
 </manifest>

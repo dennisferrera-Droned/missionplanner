@@ -8,7 +8,6 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -17,7 +16,6 @@
             android:elevation="4dp"
             app:title="DJI Photogrammetry"
             app:titleTextColor="@android:color/white" />
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
@@ -38,13 +36,11 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="16dp">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -53,13 +49,11 @@
                         android:textSize="16sp"
                         android:textColor="?attr/colorPrimary"
                         android:layout_marginBottom="8dp" />
-
                     <Spinner
                         android:id="@+id/spinnerDrone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp" />
-
                     <TextView
                         android:id="@+id/tvDroneDetails"
                         android:layout_width="match_parent"
@@ -68,32 +62,64 @@
                         android:textSize="12sp"
                         android:lineSpacingMultiplier="1.4"
                         android:text="Loading…" />
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Mission planner button -->
+            <!-- Mission Planner -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnMissionPlanner"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="10dp"
                 android:text="🗺  Mission Planner"
                 android:textSize="16sp"
                 app:cornerRadius="12dp" />
 
-            <!-- Route follow button -->
+            <!-- Route Follow -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRouteFollow"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="10dp"
                 android:text="🚶  Route Follow Mode"
                 android:textSize="16sp"
                 app:cornerRadius="12dp"
                 style="@style/Widget.Material3.Button.OutlinedButton" />
 
-            <!-- About button -->
+            <!-- Flight Control (DJI SDK) -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFlightControl"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:text="🎮  Flight Control"
+                        android:textSize="16sp"
+                        app:cornerRadius="10dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Connect drone · Upload &amp; run missions · Live GPS map · Battery / GPS status"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- About -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAbout"
                 android:layout_width="match_parent"

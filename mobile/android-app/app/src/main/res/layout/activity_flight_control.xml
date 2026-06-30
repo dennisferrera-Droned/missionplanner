@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Flight Control"
+            app:titleTextColor="@android:color/white"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Root: map left, controls right (landscape layout) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- ── Left column: live map ──────────────────────────────────── -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <!-- OsmDroid MapView -->
+            <org.osmdroid.views.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <!-- Floating status badge over the map -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:background="#CC000000"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tvMapCoords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"
+                    android:text="—"/>
+
+                <TextView
+                    android:id="@+id/tvMapAlt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"
+                    android:text="Alt: —"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- ── Right column: status + controls ───────────────────────── -->
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!-- ── Aircraft Status ──────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Aircraft Status"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="?attr/colorPrimary"
+                            android:layout_marginBottom="8dp"/>
+
+                        <!-- Connection -->
+                        <LinearLayout android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="🔗 Connection"
+                                android:textSize="12sp"/>
+                            <TextView android:id="@+id/tvConnection"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="12sp"
+                                android:text="Disconnected"
+                                android:textColor="@android:color/holo_red_dark"/>
+                        </LinearLayout>
+
+                        <!-- GPS status -->
+                        <LinearLayout android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="🛰 GPS Signal"
+                                android:textSize="12sp"/>
+                            <TextView android:id="@+id/tvGps"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="12sp"
+                                android:text="—"/>
+                        </LinearLayout>
+
+                        <!-- Satellites -->
+                        <LinearLayout android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="🛰 Satellites"
+                                android:textSize="12sp"/>
+                            <TextView android:id="@+id/tvSatellites"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="12sp"
+                                android:text="—"/>
+                        </LinearLayout>
+
+                        <!-- Battery -->
+                        <LinearLayout android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="🔋 Battery"
+                                android:textSize="12sp"/>
+                            <TextView android:id="@+id/tvBattery"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="12sp"
+                                android:text="—"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- ── SDK Status ────────────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="SDK / Mission Status"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="?attr/colorPrimary"
+                            android:layout_marginBottom="6dp"/>
+
+                        <TextView
+                            android:id="@+id/tvSdkStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:text="Initialising…"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- ── Mission JSON ──────────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="🗺 Mission"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="?attr/colorPrimary"
+                            android:layout_marginBottom="6dp"/>
+
+                        <TextView
+                            android:id="@+id/tvMissionSummary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:text="No mission loaded"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnLoadMission"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Load Mission JSON…"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            app:cornerRadius="8dp"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- ── Mission Controls ──────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mission Controls"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="?attr/colorPrimary"
+                            android:layout_marginBottom="10dp"/>
+
+                        <!-- Upload -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnUpload"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="▶ Upload Mission"
+                            android:enabled="false"
+                            app:cornerRadius="8dp"/>
+
+                        <!-- Start / Pause row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnStart"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="6dp"
+                                android:text="▶ Start"
+                                android:enabled="false"
+                                app:cornerRadius="8dp"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnPause"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_weight="1"
+                                android:text="⏸ Pause"
+                                android:enabled="false"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                app:cornerRadius="8dp"/>
+
+                        </LinearLayout>
+
+                        <!-- Stop -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnStop"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="⏹ Stop"
+                            android:enabled="false"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            app:cornerRadius="8dp"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    // Persists selected drone across the session
     var selectedProfile: DroneProfile = DroneProfiles.byId("mini3")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, names)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerDrone.adapter = adapter
-
         binding.spinnerDrone.setSelection(0)
         updateProfileCard(DroneProfiles.all[0])
 
@@ -59,15 +57,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupButtons() {
         binding.btnMissionPlanner.setOnClickListener {
-            val intent = Intent(this, MissionPlannerActivity::class.java)
-            intent.putExtra(EXTRA_DRONE_ID, selectedProfile.id)
-            startActivity(intent)
+            startActivity(
+                Intent(this, MissionPlannerActivity::class.java)
+                    .putExtra(EXTRA_DRONE_ID, selectedProfile.id)
+            )
         }
 
         binding.btnRouteFollow.setOnClickListener {
-            val intent = Intent(this, RouteFollowActivity::class.java)
-            intent.putExtra(EXTRA_DRONE_ID, selectedProfile.id)
-            startActivity(intent)
+            startActivity(
+                Intent(this, RouteFollowActivity::class.java)
+                    .putExtra(EXTRA_DRONE_ID, selectedProfile.id)
+            )
+        }
+
+        binding.btnFlightControl.setOnClickListener {
+            startActivity(Intent(this, FlightControlActivity::class.java))
         }
 
         binding.btnAbout.setOnClickListener { showAbout() }
@@ -78,12 +82,11 @@ class MainActivity : AppCompatActivity() {
             .setTitle("DJI Photogrammetry SDK")
             .setMessage(
                 "Version 1.0.0\n\n" +
-                "Open-source mission planning tool for DJI drones.\n\n" +
+                "Open-source mission planning and flight control tool for DJI drones.\n\n" +
                 "Supported drones:\n" +
                 DroneProfiles.all.joinToString("\n") { "  • ${it.displayName}" } +
                 "\n\nExports: JSON · KML\n\n" +
-                "Note: This app plans and exports missions. " +
-                "Upload to your drone using DJI Pilot 2 or the MSDK v5 integration."
+                "Flight Control requires DJI MSDK v5 and a valid API key from developer.dji.com"
             )
             .setPositiveButton("OK", null)
             .show()
